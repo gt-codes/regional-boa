@@ -1,0 +1,14 @@
+{
+	"name": "regional-boa",
+	"version": "1.0.0",
+	"description": "Regional Edge Functions via Vercel Build Output API",
+	"main": "setup.js",
+	"scripts": {
+		"setup": "node setup.js"
+	},
+	"author": "gt-codes",
+	"license": "MIT",
+	"dependencies": {
+		"fs": "^0.0.1-security"
+	}
+}
