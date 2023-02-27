@@ -23,8 +23,7 @@ const regions = [
 ];
 
 fs.mkdirSync('.vercel/output', { recursive: true });
-
-fs.writeFileSync('.vercel/output/config.json', JSON.stringify({ version: 3}));
+fs.writeFileSync('.vercel/output/config.json', JSON.stringify({ version: 3 }));
 
 for (let i = 0; i < regions.length; i++) {
 	const region = regions[i];
@@ -33,14 +32,13 @@ for (let i = 0; i < regions.length; i++) {
 	fs.mkdirSync(folderPath, { recursive: true });
 
 	// Create index.js file
-	const indexFileContent =
-		'export default function index(request, event) {\n\treturn new Response(`Hello, from the Edge!`)\n}';
+	const indexFileContent = `export default function index(request, event) {\n\treturn new Response("Hello, from the ${region} - at the Edge!")\n}`;
 	fs.writeFileSync(`${folderPath}/index.js`, indexFileContent);
 
 	// Create .vc-config.json file
 	const configContent = JSON.stringify({
-		runtime: "edge",
-		entrypoint: "index.js",
+		runtime: 'edge',
+		entrypoint: 'index.js',
 		regions: [region],
 	});
 	fs.writeFileSync(`${folderPath}/.vc-config.json`, configContent);
