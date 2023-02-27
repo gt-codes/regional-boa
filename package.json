@@ -4,7 +4,7 @@
 	"description": "Regional Edge Functions via Vercel Build Output API",
 	"main": "setup.js",
 	"scripts": {
-		"setup": "node setup.js"
+		"build": "node setup.js"
 	},
 	"author": "gt-codes",
 	"license": "MIT",

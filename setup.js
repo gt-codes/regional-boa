@@ -3,7 +3,7 @@ const fs = require('fs');
 const regions = [
 	'arn1',
 	'bom1',
-	'bru1',
+	//'bru1',
 	'cdg1',
 	'cle1',
 	'cpt1',
@@ -22,14 +22,15 @@ const regions = [
 	'syd1',
 ];
 
+fs.mkdirSync('.vercel/output', { recursive: true });
+
+fs.writeFileSync('.vercel/output/config.json', JSON.stringify({ version: 3}));
+
 for (let i = 0; i < regions.length; i++) {
 	const region = regions[i];
 	const folderPath = `.vercel/output/functions/${region}.func`;
 
-	// Create folder if it doesn't exist
-	if (!fs.existsSync(folderPath)) {
-		fs.mkdirSync(folderPath);
-	}
+	fs.mkdirSync(folderPath, { recursive: true });
 
 	// Create index.js file
 	const indexFileContent =
@@ -37,6 +38,10 @@ for (let i = 0; i < regions.length; i++) {
 	fs.writeFileSync(`${folderPath}/index.js`, indexFileContent);
 
 	// Create .vc-config.json file
-	const configContent = '{\n\t"runtime": "edge",\n\t"entrypoint": "index.js"\n}';
+	const configContent = JSON.stringify({
+		runtime: "edge",
+		entrypoint: "index.js",
+		regions: [region],
+	});
 	fs.writeFileSync(`${folderPath}/.vc-config.json`, configContent);
 }
