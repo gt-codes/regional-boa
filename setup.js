@@ -32,7 +32,7 @@ for (let i = 0; i < regions.length; i++) {
 	fs.mkdirSync(folderPath, { recursive: true });
 
 	// Create index.js file
-	const indexFileContent = `export default function index(request, event) {\n\treturn new Response("Hello, from the ${region} - at the Edge!")\n}`;
+	const indexFileContent = `export default function index(request, event) {\n\treturn new Response("Hello from the ${region} - at the Edge!")\n}`;
 	fs.writeFileSync(`${folderPath}/index.js`, indexFileContent);
 
 	// Create .vc-config.json file
